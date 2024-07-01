@@ -1,0 +1,26 @@
+.my_list-group-item {
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  /* color: rgb(255, 127, 206) !important; */
+}
+.my_list-group-item:hover {
+  background: var(--mast_blue_1);
+  color: whitesmoke;
+}
+.list_bar {
+  padding: 0 5px 15px;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+.list_search {
+  width: 100%;
+  max-width: 500px;
+  min-width: 250px;
+  border: 1px solid rgb(0 0 0 / 26%);
+  padding: 0 8px;
+  height: 35px;
+  font-size: 13px;
+  border-radius: 6px;
+}

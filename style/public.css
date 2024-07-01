@@ -1,0 +1,18 @@
+.posi_rel {
+  position: relative;
+}
+.hidden {
+  display: none;
+}
+.my_container {
+  height: 100%;
+  display: flex;
+}
+.container {
+  height: 100vh;
+  border: 1px solid var(--my-lg-blk);
+  padding: 0 !important;
+}
+.col_50 {
+  width: 50%;
+}

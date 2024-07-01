@@ -1,0 +1,43 @@
+.card_container {
+  position: absolute;
+  top: 0;
+  /* right: 0; */
+  left: 0;
+  /* bottom: 0; */
+  width: 100%;
+  /* height: 100vh; */
+  display: block;
+  background: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8px;
+}
+.my_card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  width: 100%;
+  min-height: 60vh;
+  height: fit-content;
+  padding: 35px 30px;
+}
+.card_title_container {
+  display: flex;
+  justify-content: space-between;
+}
+.card_barcode_text {
+  font-size: 12px !important;
+}
+.card_barcode {
+  font-size: 22px !important;
+
+}

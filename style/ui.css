@@ -1,0 +1,15 @@
+.btn_back_ver_1 {
+  /* position: absolute;
+  top: 50px;
+  right: 0; */
+  border: 1px solid var(--mast_blue_1);
+  padding: 2px 7px;
+  border-radius: 4px;
+  transition: all 0.3s ease-in;
+  margin-right: 5px;
+  color: var(--my-grey-text);
+}
+.btn_back_ver_1:hover {
+  background: var(--mast_blue_1);
+  color: whitesmoke;
+}

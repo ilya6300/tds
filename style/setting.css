@@ -1,0 +1,10 @@
+.setting_container {
+  padding: 1rem;
+  display: flex;
+}
+.preview_setting {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+.setting_item {
+  cursor: pointer;
+}
