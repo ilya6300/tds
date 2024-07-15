@@ -4,13 +4,13 @@
   height: 15vh;
   background: var(--my-lg-blk);
   min-height: 45px;
-  margin-bottom: 50px;
+  margin-bottom: 5vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2%;
   font-weight: 800;
-  /* box-shadow: 0 0 4px 1px var(--my-lg-blk); */
+  border-radius: 25px 25px 0 0;
 }
 .text_logo {
   color: whitesmoke;

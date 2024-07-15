@@ -21,7 +21,7 @@ class apiAuth {
       console.log(e);
       if (e.response.status === 401) {
         localStorage.removeItem("User");
-        alert(e.response.data.detail);
+        return alert(e.response.data.detail);
       }
     }
   };

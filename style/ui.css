@@ -1,7 +1,4 @@
 .btn_back_ver_1 {
-  /* position: absolute;
-  top: 50px;
-  right: 0; */
   border: 1px solid var(--mast_blue_1);
   padding: 2px 7px;
   border-radius: 4px;
@@ -12,4 +9,31 @@
 .btn_back_ver_1:hover {
   background: var(--mast_blue_1);
   color: whitesmoke;
+}
+.add_btn {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--bs-gray);
+  border-radius: 6px;
+  color: var(--bs-gray);
+  transition: all 0.4s ease;
+}
+.add_btn:hover {
+  background: var(--mast_blue_1);
+  border: 1px solid var(--mast_blue_1);
+  color: whitesmoke;
+}
+.btn_remove_v1 {
+  font-size: 13px;
+}
+.btn_remove_v1:hover {
+  color: var(--bs-danger);
+}
+.send_btn {
+  cursor: pointer;
+  width: 32px;
 }

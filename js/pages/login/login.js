@@ -1,9 +1,9 @@
+ "use strict"
 import apiAuth from "../../../service/api.auth.js";
 import { headerComponent } from "../../components/header.js";
 import { loginComponent } from "./login.container.js";
 
 const root = document.querySelector("#root");
-// const root = document.querySelector("#root");
 
 const render = async () => {
   console.log(root);
