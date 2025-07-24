@@ -1,15 +1,15 @@
 import { handlerClsBody } from "../app.js";
 
 const logo = async () => {
-  const textLogo = document.createElement("h1");
+  const textLogo = document.createElement("img");
   textLogo.classList.add("text_logo");
-  textLogo.textContent = "Русские краски";
+  textLogo.src = "img/logo_header.png";
   return textLogo;
 };
 
 const settings = async () => {
   const iconSetting = document.createElement("img");
-  iconSetting.setAttribute("src", "../../img/icons/icon-settings.png");
+  iconSetting.setAttribute("src", "img/icons/icon-settings.png");
   iconSetting.classList.add("logo_icon");
   iconSetting.onclick = async () => {
     handlerClsBody(iconSetting);

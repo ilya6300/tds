@@ -1,7 +1,7 @@
 import apiData from "../../../service/api.data.js";
 import { tds } from "../../core/tds.component.js";
 
-const onchangeLanguage = async (id) => {};
+// const onchangeLanguage = async (id) => {};
 
 export const selectedLanguage = async (id) => {
   const lang = await apiData.getLanguange();
@@ -9,7 +9,6 @@ export const selectedLanguage = async (id) => {
   select.id = id;
   select.classList.add("option_base");
   select.onchange = async (e) => {
-    console.log(e.target.value);
     const itemID = tds.find((t) => t.id == id);
     if (itemID) {
       itemID.language = e.target.value;
@@ -23,11 +22,11 @@ export const selectedLanguage = async (id) => {
 
   select.append(option_base);
   lang.map((l) => {
+    if (l.archived) return;
     const option = document.createElement("option");
     option.textContent = l.name;
     option.value = l.id;
     option.onclick = async (l) => {
-      console.log(l);
       // await onchangeLanguage();
     };
     select.append(option);

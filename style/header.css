@@ -1,16 +1,16 @@
 .header {
   width: 100%;
-  max-height: 110px;
-  height: 15vh;
+  /* max-height: 110px; */
+  height: 115px;
   background: var(--my-lg-blk);
   min-height: 45px;
-  margin-bottom: 5vh;
+  /* margin-bottom: 5vh; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2%;
   font-weight: 800;
-  border-radius: 25px 25px 0 0;
+  /* border-radius: 25px 25px 0 0; */
 }
 .text_logo {
   color: whitesmoke;
@@ -19,18 +19,25 @@
   height: auto;
   image-rendering: pixelated;
   cursor: pointer;
-  filter: invert(1);
+  /* filter: invert(1); */
 }
 .logo_icon:hover {
-  animation: setting_anim 5s linear infinite;
+  animation: setting_anim 3s linear infinite;
 }
 .logo_icon-anim {
   height: auto;
   image-rendering: pixelated;
   cursor: pointer;
-  filter: invert(1);
-  animation: setting_anim 5s linear infinite;
+  /* filter: invert(1); */
+  animation: setting_anim 3s linear infinite;
 }
+
+.logo_page {
+  display: block;
+  padding: 44px 0 39px 0;
+  margin: auto;
+}
+
 @keyframes setting_anim {
   100% {
     transform: rotate(360deg);

@@ -5,7 +5,6 @@ class apiAuth {
     try {
       const res = await axios.post(`${url}auth/`, data);
       if (res.status === 200) {
-        console.log("ok");
         localStorage.setItem(
           "User",
           JSON.stringify({
@@ -13,12 +12,10 @@ class apiAuth {
             user: data.username,
           })
         );
-        window.location.href = "../index.html";
+        window.location.href = "index.html";
       }
-
-      console.log(res);
     } catch (e) {
-      console.log(e);
+      console.error(e);
       if (e.response.status === 401) {
         localStorage.removeItem("User");
         return alert(e.response.data.detail);

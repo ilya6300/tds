@@ -1,5 +1,6 @@
 import apiData from "../../service/api.data.js";
 import { closedNewCard } from "../app.js";
+import { logoPage } from "../components/logo_page.js";
 import state_manager from "../state_manager.js";
 import { btnV1 } from "../ui/btn_v1.js";
 import { listProduction } from "./list.production.js";
@@ -21,19 +22,23 @@ const createCard = async () => {
   return card;
 };
 
-const createBackBtn = async () => {
-  const btnBack = await btnV1();
-  btnBack.textContent = "Назад";
-  cardContainer.append(btnBack);
-  btnBack.onclick = async () => {
-    await closedNewCard();
-  };
-  container.innerHTML = "";
-  await createBody();
-  production.name = "";
-  production.description = "";
-  production.ean = "";
-};
+// const createBackBtn = async () => {
+//   const btnBack = await btnV1();
+//   const imgArrow = document.createElement("img");
+//   imgArrow.src = "../../img/icons/Arrow1.png";
+//   btnBack.append(imgArrow);
+//   btnBack.innerHTML += "  Назад";
+
+//   cardContainer.append(btnBack);
+//   btnBack.onclick = async () => {
+//     await closedNewCard();
+//   };
+//   container.innerHTML = "";
+//   await createBody();
+//   production.name = "";
+//   production.description = "";
+//   production.ean = "";
+// };
 
 const container = document.createElement("ul");
 
@@ -41,6 +46,7 @@ const postProduction = async () => {
   const postBtn = await btnV1();
   postBtn.textContent = "Сохранить";
   postBtn.classList.add("btn_save_card");
+  postBtn.style.marginBottom = "18vh";
   postBtn.onclick = async () => {
     if (production.name.length < 3) {
       return alert("Название не должно быть менее 3 символов");
@@ -51,39 +57,48 @@ const postProduction = async () => {
     try {
       if (tds.length === 0) {
         await apiData.postProduction(production);
-        console.log(tds, tds.length);
         await closedNewCard();
-        // setTimeout(async () => {
-        //   await listProduction(await state_manager.getProductionFunc());
-        // }, 200);
         container.innerHTML = "";
         await createBody();
         production.name = "";
         production.description = "";
         production.ean = "";
       } else {
+        const validFormTDS = () => {
+          let result = true;
+          tds.forEach(async (t) => {
+            if (t.file === null && result) {
+              result = false;
+              return alert("Не выбран файл. ТДС не сохранена");
+            }
+            if (t.language === "" && result) {
+              result = false;
+              return alert("Не выбран язык. ТДС не сохранена");
+            }
+          });
+          return result;
+        };
         try {
           await apiData.postProduction(production);
         } catch (e) {
-          return console.log(e);
+          return console.error(e);
         } finally {
-          tds.forEach((t) => {
-            if (t.file === "") {
-              return alert("Не выбран файл. ТДС не сохранена");
-            }
-            if (t.language === "") {
-              return alert("Не выбран язык. ТДС не сохранена");
-            }
-            apiData.postTDS(t);
-          });
+          const tdsFormResult = validFormTDS();
+          if (tdsFormResult) {
+            tds.forEach(async (t) => {
+              await apiData.postTDS(t);
+            });
+          }
         }
         // postBtn.classList.add("hidden");
       }
       setTimeout(async () => {
-        await listProduction(await state_manager.getProductionFunc());
-      }, 200);
+        // await state_manager.getProductionFunc();
+        // await closedNewCard();
+        location.reload();
+      }, 300);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
   return postBtn;
@@ -95,14 +110,18 @@ const createBody = async () => {
   const nameInpt = document.createElement("li");
   const barcodeText = document.createElement("li");
   const barcodeInpt = document.createElement("li");
-  const descriptionText = document.createElement("li");
-  const descriptionInpt = document.createElement("li");
-  container.append(nameText);
-  container.append(nameInpt);
-  container.append(barcodeText);
-  container.append(barcodeInpt);
-  container.append(descriptionText);
-  container.append(descriptionInpt);
+  const nameContainer = document.createElement("div");
+  const barcodeContainer = document.createElement("div");
+  nameContainer.classList.add("input_new_container");
+  barcodeContainer.classList.add("input_new_container");
+  // const descriptionText = document.createElement("li");
+  // const descriptionInpt = document.createElement("li");
+  container.append(nameContainer);
+  nameContainer.append(nameText, nameInpt);
+  container.append(barcodeContainer);
+  barcodeContainer.append(barcodeText, barcodeInpt);
+  // container.append(descriptionText);
+  // container.append(descriptionInpt);
 
   nameText.textContent = "Введите имя новой продукции";
   nameText.classList.add("card_item");
@@ -118,56 +137,43 @@ const createBody = async () => {
   barcode.classList.add("card_item_input", "card_item_input-barcode");
   barcodeInpt.append(barcode);
   barcode.setAttribute("type", "number");
+  barcode.addEventListener("keydown", function (e) {
+    if (e.key === "-" || e.key === "+" || e.key === "." || e.key === ",") {
+      e.preventDefault();
+    }
+  });
   barcode.onchange = async (e) => {
+    barcode.addEventListener("keydown", function (e) {});
+
     production.ean = e.target.value;
   };
-  descriptionText.textContent = "Введите описание продукции";
-  descriptionText.classList.add("card_item");
-  const textarea = document.createElement("textarea");
-  textarea.classList.add("card_item_input", "card_item_input-textarea");
-  descriptionInpt.append(textarea);
-  descriptionInpt.onchange = async (e) => {
-    production.description = e.target.value;
-    console.log(production);
-  };
-  console.log(typeof (await tdsComponent()));
-
   return container;
 };
 
-//   const createinptFile = async () => {
-//     const file = document.createElement("input");
-//     file.classList.add("file_input_btn");
-//     file.type = "file";
-//     file.onchange = async (e) => {
-//       console.log(e);
-//       await sendFile(e.target.files[0]);
-//     };
-//     return file;
-//   };
-
-//   const sendFile = async (file) => {
-//     const reader = new FileReader();
-//     reader.onload = () => {
-//       console.log(file);
-//       console.log(reader.result);
-//       production.file = reader.result.replace(
-//         /data:application\/pdf;base64,/g,
-//         ""
-//       );
-//     };
-//     return reader.readAsDataURL(file);
-//   };
 export const newProductionComponent = async () => {
-  await createBackBtn();
+  const btnBack = await btnV1();
+  const imgArrow = document.createElement("img");
+  imgArrow.src = "img/icons/Arrow1.png";
+  btnBack.append(imgArrow);
+  btnBack.innerHTML += "  Назад";
+  btnBack.onclick = async () => {
+    await closedNewCard();
+  };
+  const titleHeader = document.createElement("div");
+  titleHeader.classList.add("titleHeader");
+  container.innerHTML = "";
+  await createBody();
+  production.name = "";
+  production.description = "";
+  production.ean = "";
   const cardNew = await createCard();
   const titleH4 = document.createElement("h4");
-  titleH4.textContent = "Создание новой карточки продукции";
+  titleHeader.append(btnBack, titleH4);
+  titleH4.textContent = "Создание новой карточки";
   titleH4.classList.add("title_new_card");
-  cardNew.append(titleH4);
+  cardNew.append(await logoPage(), titleHeader);
   cardNew.append(await createBody());
   cardNew.append(addContainer);
-  console.log(addContainer);
   cardNew.append(await postProduction());
 
   return cardContainer;

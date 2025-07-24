@@ -1,14 +1,23 @@
 .setting_container {
   padding: 1rem;
-  display: flex;
+  background-color: #fff;
+  border-radius: 40px 40px 0 0;
+  height: calc(100vh - 115px);
+  /* display: flex; */
 }
 .preview_setting {
+  height: 70vh;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 6px;
   font-size: 15px;
+  overflow-y: auto;
 }
 .setting_user {
+  width: 100%;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
 }
 .setting_item {
   position: relative;
@@ -32,6 +41,10 @@
 }
 .setting_btn_container {
   margin: 15px 0;
+  display: flex;
+  margin: 15px 0;
+  gap: 25px;
+  justify-content: flex-end;
 }
 .edit_icon {
   width: 24px;
@@ -76,4 +89,61 @@
 }
 .lang_edit_container_text {
   width: 80%;
+}
+.setting_item_pdf_name {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+.setting_list_container {
+  display: flex;
+}
+.tds_list_container {
+  height: 80%;
+}
+.log_out_text {
+  color: var(--my-grey-text);
+}
+.log_out_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.btn_container_edit_abbr {
+  display: flex;
+  gap: 15px;
+}
+.header_tds_setting {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.tds_setting_arhive_btn_deactive {
+  cursor: pointer;
+  border: 1px solid var(--mast_blue_1);
+  padding: 2px 7px;
+  border-radius: 4px;
+  transition: all 0.3s ease-in;
+  color: var(--my-grey-text);
+  background: white;
+}
+.tds_setting_arhive_btn_deactive:hover {
+  background: var(--mast_blue_1);
+  color: white;
+  box-shadow: 0 0 9px 1px var(--mast_blue_1);
+}
+.tds_setting_arhive_btn_active {
+  cursor: pointer;
+  border: 1px solid var(--mast_blue_1);
+  padding: 2px 7px;
+  border-radius: 4px;
+  transition: all 0.3s ease-in;
+  background: var(--mast_blue_1);
+  color: white;
+  box-shadow: 0 0 9px 1px var(--mast_blue_1);
+}
+.tds_setting_arhive_btn_active:hover {
+  background: white;
+  color: var(--mast_blue_1);
+  box-shadow: none;
 }

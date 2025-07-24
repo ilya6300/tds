@@ -12,14 +12,12 @@ export const createSearch = async () => {
   barList.classList.add("list_bar");
   barList.id = "bar-search";
   const searchInp = document.createElement("input");
-  searchInp.placeholder = "Продукция, ШК, описание...";
+  searchInp.placeholder = "ШК, название";
   searchInp.classList.add("list_search");
   searchInp.setAttribute("id", "search");
   searchInp.type = "text";
 
-  searchInp.onchange = async (e) => {
-    console.log(e.target.value);
-    console.log(e);
+  searchInp.oninput = async (e) => {
     searchInp.value = e.target.value;
     await searchProduction(e.target.value);
   };
@@ -33,12 +31,15 @@ const searchProduction = async (e) => {
   listProduction();
 };
 
+export let listContainer = document.createElement("div");
+export let list = document.createElement("ul");
+
 export const listProduction = async () => {
-  let list;
-  let listContainer;
+  // let list;
+  // let listContainer;
   if (document.getElementById("list") === null) {
-    list = document.createElement("ul");
-    listContainer = document.createElement("div");
+    // list = document.createElement("ul");
+    // listContainer = document.createElement("div");
     listContainer.id = "listContainer";
   } else {
     list = document.getElementById("list");
@@ -47,7 +48,7 @@ export const listProduction = async () => {
 
   list.setAttribute("id", "list");
   list.innerHTML = "";
-  list.classList.add("list-group", "posi_rel");
+  list.classList.add("list-group", "posi_rel", "list_product_app");
 
   if (JSON.parse(localStorage.getItem("User")) === null) return;
 
@@ -69,11 +70,12 @@ export const listProduction = async () => {
     list.append(itemProduction);
     itemProduction.onclick = async () => {
       state_manager.card_id = p.id;
-      listContainer.append(await cardComponent(p));
       list.classList.add("hidden");
+      const openCard = await cardComponent(p);
+      listContainer.append(openCard);
     };
   });
 
-  listContainer.append( list);
+  listContainer.append(list);
   return listContainer;
 };
